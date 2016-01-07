@@ -6,6 +6,55 @@ import sys
 from pyloadutils.pyload import PyloadConnection
 
 def main():
+    
+    if len(sys.argv) > 1:
+        if sys.argv[1] == '-h':
+            print("""
+
+USAGE:
+
+This script will merge all packages, that either have the same name
+-or-')
+have the same string in match group 1 of the supplied regex.
+
+$ {args!s} '[REGEX]'
+
+
+EXAMPLES:
+
+  Given Packages:
+   > Package 'foobar':       [http://a, http://b]
+   > Package 'foobar':       [http://c, http://d]
+   > Package 'foobaz gamma': [http://e, http://f]
+   > Package 'foobaz delta': [http://g, http://h]
+
+
+
+  Merge all packages with the same name:
+   $ {args!s}
+
+   > Package 'foobar':       [http://a, http://b, http://c, http://d]
+   > Package 'foobaz gamma': [http://e, http://f]
+   > Package 'foobaz delta': [http://g, http://h]
+
+
+  Merge all packages containing 'foo':
+   $ {args!s} '.*(foo).*'
+
+   > Package 'foo': [http://a, http://b, http://c, http://d, http://e, http://f, http://g, http://h]
+
+
+  Merge all packages containing 'fooba.' (E.g. merge any 'foobar' to a single package, as well as any 'foobaz' to a
+   $ {args!s} '.*(fooba.).*'
+
+   > Package 'foobar': [http://a, http://b, http://c, http://d]
+   > Package 'foobaz': [http://e, http://f, http://g, http://h]
+
+
+""".format(args=sys.argv[0]))
+
+            return
+
     con = PyloadConnection()
 
     collected = con.getCollectorData()
