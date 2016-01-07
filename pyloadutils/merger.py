@@ -14,7 +14,7 @@ def main():
 USAGE:
 
 This script will merge all packages, that either have the same name
--or-')
+-or-
 have the same string in match group 1 of the supplied regex.
 
 $ {args!s} '[REGEX]'
@@ -44,7 +44,7 @@ EXAMPLES:
    > Package 'foo': [http://a, http://b, http://c, http://d, http://e, http://f, http://g, http://h]
 
 
-  Merge all packages containing 'fooba.' (E.g. merge any 'foobar' to a single package, as well as any 'foobaz' to a
+  Merge all packages containing 'fooba.' (E.g. merge any 'foobar' to a single package, as well as any 'foobaz' to another single package:
    $ {args!s} '.*(fooba.).*'
 
    > Package 'foobar': [http://a, http://b, http://c, http://d]
